@@ -161,3 +161,26 @@ class LinkedDisappearingStep {
         this.curr.startUpdating(cb)
     }
 }
+
+class Renderer {
+    lds : LinkedDisappearingStep = new LinkedDisappearingStep()
+    animator : Animator = new Animator()
+
+    render(context : CanvasRenderingContext2D) {
+        context.fillStyle = '#BDBDBD'
+        this.lds.draw(context)
+    }
+
+    handleTap(cb : Function) {
+        this.lds.startUpdating(() => {
+            this.animator.start(() => {
+                cb()
+                this.lds.update(() => {
+                    this.animator.stop()
+                    cb()
+                })
+            })
+        })
+    }
+
+}
