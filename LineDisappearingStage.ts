@@ -100,6 +100,9 @@ class LDSNode {
     draw(context : CanvasRenderingContext2D) {
         const gap : number = w / (nodes + 1)
         const size : number = (gap) / 3
+        context.lineWidth = Math.min(w, h) / 60
+        context.lineCap = 'round'
+        context.strokeStyle = '#673AB7'
         context.save()
         context.translate(gap * (1 + this.i), h / 2)
         for (var j = 0; j < 2; j++) {
@@ -112,7 +115,7 @@ class LDSNode {
             context.rotate(Math.PI/2 * sc1 * sf)
             context.beginPath()
             context.moveTo(0, 0)
-            context.lineTo(0, 2 * size)
+            context.lineTo(2 * size, 0)
             context.stroke()
             context.restore()
         }
